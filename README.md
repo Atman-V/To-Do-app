@@ -1,6 +1,6 @@
 # To-Do List App
 
-A simple task manager built with Flask, MySQL, and vanilla JS.
+A simple task manager built with Flask, MySQL, and JS.
 
 ## Tech Used
 
