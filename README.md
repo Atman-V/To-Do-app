@@ -1,91 +1,49 @@
-# Task Board — To-Do / Task Management Application
+# To-Do List App
 
-A simple full-stack task manager with a Flask REST API backend, MySQL database, and a vanilla HTML/CSS/JS frontend.
+A simple task manager built with Flask, MySQL, and vanilla JS.
 
-## Tech Stack
+## Tech Used
 
-- **Frontend:** HTML, JavaScript (vanilla, no framework)
-- **Backend:** Python, Flask
-- **Database:** MySQL (via SQLAlchemy ORM + PyMySQL driver)
-- **Version Control:** Git / GitHub
+- Frontend: HTML, CSS, JavaScript
+- Backend: Python, Flask
+- Database: MySQL (SQLAlchemy + PyMySQL)
 
 ## Features
 
-- Add a task with title, description, and priority (Low / Medium / High)
+- Add a task (title, description, priority)
 - View all tasks
-- Update task status (Pending / Completed)
+- Mark task as done / undo
 - Delete a task
-- Filter tasks by All / Pending / Completed
+- Filter by All / Pending / Completed
 
-## REST API
+## API
 
-| Method | Endpoint            | Description               |
-|--------|---------------------|----------------------------|
-| GET    | `/api/tasks`        | Get all tasks (optional `?status=Pending`) |
-| POST   | `/api/tasks`        | Create a new task          |
-| PUT    | `/api/tasks/<id>`   | Update a task               |
-| DELETE | `/api/tasks/<id>`   | Delete a task               |
+- GET /api/tasks
+- POST /api/tasks
+- PUT /api/tasks/<id>
+- DELETE /api/tasks/<id>
 
-## Setup & Run
+## Setup
 
-### 1. Start MySQL (using Docker)
-
-```bash
+1. Start MySQL:
+```
 docker-compose up -d
 ```
 
-This starts a MySQL 8.0 container with a `tododb` database, user `root`, password `rootpassword`, exposed on port 3306.
-
-### 2. Create a virtual environment and install dependencies
-
-```bash
+2. Create virtual environment and install packages:
+```
 python -m venv venv
-venv\Scripts\activate      # Windows
-# source venv/bin/activate  # macOS/Linux
-
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Run the app
-
-```bash
+3. Run the app:
+```
 python app.py
 ```
 
-The app will be available at **http://localhost:5000**
+4. Open http://localhost:5000
 
-The Flask app automatically creates the `tasks` table on startup if it doesn't exist (`db.create_all()`).
+## Notes
 
-### Environment variables (optional)
-
-If you're not using the default docker-compose values, set these before running:
-
-```bash
-DB_USER=root
-DB_PASSWORD=rootpassword
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=tododb
-```
-
-## Project Structure
-
-```
-todo-app/
-├── app.py                 # Flask app + REST API + DB model
-├── requirements.txt
-├── docker-compose.yml      # MySQL container for local dev
-├── .gitignore
-├── README.md
-├── templates/
-│   └── index.html          # Main page
-└── static/
-    ├── style.css
-    └── script.js            # Frontend logic (fetch calls, rendering)
-```
-
-## Design Notes
-
-- **SQLAlchemy ORM** is used instead of raw SQL for cleaner, safer queries (avoids manual SQL injection risks) and easier schema management.
-- **Status/priority filtering** is done server-side via a query parameter (`?status=`) rather than in the frontend, so the API stays the single source of truth.
-- **Event delegation** is used in `script.js` for task actions (toggle/delete) so newly rendered tasks don't need individual listeners re-attached.
+Default DB values (host, user, password) are set in app.py using environment variables, so it works with the docker-compose file out of the box. If your MySQL is on a different port, set DB_PORT before running.
