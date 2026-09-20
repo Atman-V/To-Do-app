@@ -11,6 +11,12 @@
 <div class="container">
   <h1>Task Management Application</h1>
 
+  <div class="stats">
+    <div class="stat"><span class="stat-value" id="stat-total">0</span><span class="stat-label">total</span></div>
+    <div class="stat"><span class="stat-value" id="stat-pending">0</span><span class="stat-label">pending</span></div>
+    <div class="stat"><span class="stat-value" id="stat-completed">0</span><span class="stat-label">completed</span></div>
+  </div>
+
   <form id="task-form">
     <input type="text" id="input-title" placeholder="Task name" required maxlength="200">
     <input type="text" id="input-description" placeholder="Description">

@@ -15,6 +15,15 @@ async function loadTasks() {
   const res = await fetch(url);
   const tasks = await res.json();
   renderTasks(tasks);
+  updateStats();
+}
+
+async function updateStats() {
+  const res = await fetch(API_URL);
+  const allTasks = await res.json();
+  document.getElementById("stat-total").textContent = allTasks.length;
+  document.getElementById("stat-pending").textContent = allTasks.filter(t => t.status === "Pending").length;
+  document.getElementById("stat-completed").textContent = allTasks.filter(t => t.status === "Completed").length;
 }
 
 function renderTasks(tasks) {
